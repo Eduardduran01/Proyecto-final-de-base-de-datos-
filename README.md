@@ -1,0 +1,2 @@
+# Proyecto-final-de-base-de-datos-
+Este trabajo trata sobre la empresa resource solution database que es una compañía creada en el año 2012 por Eduard duran, esta compañía trata sobre la creación de base de datos para guardar registros de alumnos y empleados de escuelas que adquiera el producto para la mejora de estos tipos de almacenaje de datos y dejar de guardar los datos en papel y comenzar a guardarlos en la base de datos . Eduard Michael Duran Canelo 20-SIIT-1-001
