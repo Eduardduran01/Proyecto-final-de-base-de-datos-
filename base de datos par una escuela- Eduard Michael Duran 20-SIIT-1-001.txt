@@ -1,0 +1,248 @@
+USE [master]
+GO
+/****** Object:  Database [escuela]    Script Date: 19/4/2022 10:25:20 p. m. ******/
+CREATE DATABASE [escuela]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'escuela', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\escuela.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'escuela_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\escuela_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT
+GO
+ALTER DATABASE [escuela] SET COMPATIBILITY_LEVEL = 150
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [escuela].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [escuela] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [escuela] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [escuela] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [escuela] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [escuela] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [escuela] SET AUTO_CLOSE ON 
+GO
+ALTER DATABASE [escuela] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [escuela] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [escuela] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [escuela] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [escuela] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [escuela] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [escuela] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [escuela] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [escuela] SET  ENABLE_BROKER 
+GO
+ALTER DATABASE [escuela] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [escuela] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [escuela] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [escuela] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [escuela] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [escuela] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [escuela] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [escuela] SET RECOVERY SIMPLE 
+GO
+ALTER DATABASE [escuela] SET  MULTI_USER 
+GO
+ALTER DATABASE [escuela] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [escuela] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [escuela] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [escuela] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [escuela] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [escuela] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+ALTER DATABASE [escuela] SET QUERY_STORE = OFF
+GO
+USE [escuela]
+GO
+/****** Object:  Table [dbo].[asignatura]    Script Date: 19/4/2022 10:25:21 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[asignatura](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[asignatura] [nvarchar](100) NULL,
+ CONSTRAINT [PK_asignatura] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[curso]    Script Date: 19/4/2022 10:25:21 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[curso](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[curso] [nvarchar](100) NULL,
+ CONSTRAINT [PK_curso] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[estudiante_curso]    Script Date: 19/4/2022 10:25:21 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[estudiante_curso](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[idestudiante] [nvarchar](100) NULL,
+	[idprofesor] [nvarchar](100) NULL,
+	[idcurso] [nvarchar](100) NULL,
+	[idasignatura] [nvarchar](100) NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[estudiantes]    Script Date: 19/4/2022 10:25:21 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[estudiantes](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[primer_nombre] [nvarchar](100) NULL,
+	[segundo_nombre] [nvarchar](100) NULL,
+	[apellidos] [nvarchar](100) NULL,
+ CONSTRAINT [PK_estudiantes] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[profesor]    Script Date: 19/4/2022 10:25:21 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[profesor](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[primer_nombre] [nvarchar](100) NULL,
+	[primer_apellido] [nvarchar](100) NULL,
+ CONSTRAINT [PK_profesor] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[asignatura] ON 
+
+INSERT [dbo].[asignatura] ([id], [asignatura]) VALUES (1, N'español')
+INSERT [dbo].[asignatura] ([id], [asignatura]) VALUES (2, N'mateamticas')
+INSERT [dbo].[asignatura] ([id], [asignatura]) VALUES (3, N'sociales')
+INSERT [dbo].[asignatura] ([id], [asignatura]) VALUES (4, N'matematicas')
+INSERT [dbo].[asignatura] ([id], [asignatura]) VALUES (5, N'ingles ')
+INSERT [dbo].[asignatura] ([id], [asignatura]) VALUES (6, N'frances')
+INSERT [dbo].[asignatura] ([id], [asignatura]) VALUES (7, N'informatica')
+INSERT [dbo].[asignatura] ([id], [asignatura]) VALUES (8, N'fisica ')
+INSERT [dbo].[asignatura] ([id], [asignatura]) VALUES (9, N'mecnica ')
+INSERT [dbo].[asignatura] ([id], [asignatura]) VALUES (10, N'aleman ')
+SET IDENTITY_INSERT [dbo].[asignatura] OFF
+GO
+SET IDENTITY_INSERT [dbo].[curso] ON 
+
+INSERT [dbo].[curso] ([id], [curso]) VALUES (1, N'8vo A')
+INSERT [dbo].[curso] ([id], [curso]) VALUES (2, N'8vo B')
+INSERT [dbo].[curso] ([id], [curso]) VALUES (3, N'7mo A')
+INSERT [dbo].[curso] ([id], [curso]) VALUES (4, N'7mo B')
+INSERT [dbo].[curso] ([id], [curso]) VALUES (5, N'6to')
+INSERT [dbo].[curso] ([id], [curso]) VALUES (6, N'5to')
+INSERT [dbo].[curso] ([id], [curso]) VALUES (7, N'4to')
+INSERT [dbo].[curso] ([id], [curso]) VALUES (8, N'3ro')
+INSERT [dbo].[curso] ([id], [curso]) VALUES (9, N'2do')
+INSERT [dbo].[curso] ([id], [curso]) VALUES (10, N'1ro')
+SET IDENTITY_INSERT [dbo].[curso] OFF
+GO
+SET IDENTITY_INSERT [dbo].[estudiante_curso] ON 
+
+INSERT [dbo].[estudiante_curso] ([ID], [idestudiante], [idprofesor], [idcurso], [idasignatura]) VALUES (1, N'andrea de la cruz', N'oscar santos', N'8vo A', N'aleman')
+INSERT [dbo].[estudiante_curso] ([ID], [idestudiante], [idprofesor], [idcurso], [idasignatura]) VALUES (2, N'jose diaz', N'adonis fernandez', N'8vo B', N'mecanica ')
+INSERT [dbo].[estudiante_curso] ([ID], [idestudiante], [idprofesor], [idcurso], [idasignatura]) VALUES (3, N'jomar soriano', N'nicauris ortiz ', N'7mo A', N'fisica ')
+INSERT [dbo].[estudiante_curso] ([ID], [idestudiante], [idprofesor], [idcurso], [idasignatura]) VALUES (4, N'isaura feliz', N'anatalia miller', N'7mo B', N'informatica ')
+INSERT [dbo].[estudiante_curso] ([ID], [idestudiante], [idprofesor], [idcurso], [idasignatura]) VALUES (5, N'jhonn castillos', N'felipe cedeño', N'6to', N'frances ')
+INSERT [dbo].[estudiante_curso] ([ID], [idestudiante], [idprofesor], [idcurso], [idasignatura]) VALUES (6, N'bruno gonzalez ', N'kelvin mejia ', N'5to', N'ingles ')
+INSERT [dbo].[estudiante_curso] ([ID], [idestudiante], [idprofesor], [idcurso], [idasignatura]) VALUES (7, N'enders mora ', N'sandra smith', N'4to', N'matematicas ')
+INSERT [dbo].[estudiante_curso] ([ID], [idestudiante], [idprofesor], [idcurso], [idasignatura]) VALUES (8, N'andres reyes ', N'carlos duran ', N'3ro', N'sociales ')
+INSERT [dbo].[estudiante_curso] ([ID], [idestudiante], [idprofesor], [idcurso], [idasignatura]) VALUES (9, N'lesly ramirez ', N'mario pimentel', N'2do', N'matematica ')
+INSERT [dbo].[estudiante_curso] ([ID], [idestudiante], [idprofesor], [idcurso], [idasignatura]) VALUES (10, N'lisandra garcias ', N'ilda encarnacion', N'1ro', N'español')
+SET IDENTITY_INSERT [dbo].[estudiante_curso] OFF
+GO
+SET IDENTITY_INSERT [dbo].[estudiantes] ON 
+
+INSERT [dbo].[estudiantes] ([id], [primer_nombre], [segundo_nombre], [apellidos]) VALUES (1, N'andrea', N'diana', N'de la cruz perez')
+INSERT [dbo].[estudiantes] ([id], [primer_nombre], [segundo_nombre], [apellidos]) VALUES (2, N'jose', N'rafael', N'diaz ferran')
+INSERT [dbo].[estudiantes] ([id], [primer_nombre], [segundo_nombre], [apellidos]) VALUES (3, N'jomar', N'juan', N'soriano alcantara')
+INSERT [dbo].[estudiantes] ([id], [primer_nombre], [segundo_nombre], [apellidos]) VALUES (4, N'isaura', N'martha', N'feliz augusto')
+INSERT [dbo].[estudiantes] ([id], [primer_nombre], [segundo_nombre], [apellidos]) VALUES (5, N'bruno ', N'martin', N'gonzales diez')
+INSERT [dbo].[estudiantes] ([id], [primer_nombre], [segundo_nombre], [apellidos]) VALUES (6, N'jhonn', N'arbel', N'castillo jimenez')
+INSERT [dbo].[estudiantes] ([id], [primer_nombre], [segundo_nombre], [apellidos]) VALUES (7, N'enders', N'yojhancel', N'mora roso')
+INSERT [dbo].[estudiantes] ([id], [primer_nombre], [segundo_nombre], [apellidos]) VALUES (8, N'andres ', N'cesar', N'reyes melenciano')
+INSERT [dbo].[estudiantes] ([id], [primer_nombre], [segundo_nombre], [apellidos]) VALUES (9, N'lesly', N'manuela', N'ramirez nuñez')
+INSERT [dbo].[estudiantes] ([id], [primer_nombre], [segundo_nombre], [apellidos]) VALUES (10, N'lisandra ', N'gedelin', N'garcias cabrera')
+SET IDENTITY_INSERT [dbo].[estudiantes] OFF
+GO
+SET IDENTITY_INSERT [dbo].[profesor] ON 
+
+INSERT [dbo].[profesor] ([id], [primer_nombre], [primer_apellido]) VALUES (1, N'ilda', N'encarnacion')
+INSERT [dbo].[profesor] ([id], [primer_nombre], [primer_apellido]) VALUES (2, N'mario', N'pimentel')
+INSERT [dbo].[profesor] ([id], [primer_nombre], [primer_apellido]) VALUES (3, N'carlos', N'duran')
+INSERT [dbo].[profesor] ([id], [primer_nombre], [primer_apellido]) VALUES (4, N'sandra', NULL)
+INSERT [dbo].[profesor] ([id], [primer_nombre], [primer_apellido]) VALUES (5, N'kelvin', N'mejia')
+INSERT [dbo].[profesor] ([id], [primer_nombre], [primer_apellido]) VALUES (6, N'felipe', N'cedeño')
+INSERT [dbo].[profesor] ([id], [primer_nombre], [primer_apellido]) VALUES (7, N'anathalia', N'miller')
+INSERT [dbo].[profesor] ([id], [primer_nombre], [primer_apellido]) VALUES (8, N'nicauris', N'ortiz')
+INSERT [dbo].[profesor] ([id], [primer_nombre], [primer_apellido]) VALUES (9, N'adonis', N'fernandez')
+INSERT [dbo].[profesor] ([id], [primer_nombre], [primer_apellido]) VALUES (10, N'oscar', N'santos')
+SET IDENTITY_INSERT [dbo].[profesor] OFF
+GO
+ALTER TABLE [dbo].[estudiante_curso]  WITH CHECK ADD  CONSTRAINT [FK_estudiante_curso_asignatura] FOREIGN KEY([ID])
+REFERENCES [dbo].[asignatura] ([id])
+GO
+ALTER TABLE [dbo].[estudiante_curso] CHECK CONSTRAINT [FK_estudiante_curso_asignatura]
+GO
+ALTER TABLE [dbo].[estudiante_curso]  WITH CHECK ADD  CONSTRAINT [FK_estudiante_curso_curso] FOREIGN KEY([ID])
+REFERENCES [dbo].[curso] ([id])
+GO
+ALTER TABLE [dbo].[estudiante_curso] CHECK CONSTRAINT [FK_estudiante_curso_curso]
+GO
+ALTER TABLE [dbo].[estudiante_curso]  WITH CHECK ADD  CONSTRAINT [FK_estudiante_curso_estudiantes] FOREIGN KEY([ID])
+REFERENCES [dbo].[estudiantes] ([id])
+GO
+ALTER TABLE [dbo].[estudiante_curso] CHECK CONSTRAINT [FK_estudiante_curso_estudiantes]
+GO
+ALTER TABLE [dbo].[estudiante_curso]  WITH CHECK ADD  CONSTRAINT [FK_estudiante_curso_profesor] FOREIGN KEY([ID])
+REFERENCES [dbo].[profesor] ([id])
+GO
+ALTER TABLE [dbo].[estudiante_curso] CHECK CONSTRAINT [FK_estudiante_curso_profesor]
+GO
+USE [master]
+GO
+ALTER DATABASE [escuela] SET  READ_WRITE 
+GO
